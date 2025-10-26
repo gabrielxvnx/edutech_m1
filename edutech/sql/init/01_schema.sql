@@ -73,9 +73,11 @@ CREATE TABLE IF NOT EXISTS matriculas (
     data_matricula TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     data_conclusao DATE,
     status VARCHAR(20) NOT NULL DEFAULT 'ativa',
+    valor_pago NUMERIC(10,2),
     CONSTRAINT chk_status CHECK (status IN ('ativa', 'concluida', 'cancelada')),
     CONSTRAINT chk_data_conclusao CHECK (data_conclusao IS NULL OR data_conclusao > data_matricula),
-    CONSTRAINT uk_aluno_curso UNIQUE (aluno_id, curso_id)
+    CONSTRAINT uk_aluno_curso UNIQUE (aluno_id, curso_id),
+    CONSTRAINT chk_valor_pago CHECK (valor_pago >= 0)
 );
 
 -- PROGRESSO AULAS (depende de matriculas e aulas)
