@@ -21,29 +21,36 @@ def conectar_banco():
     """Conecta ao PostgreSQL. Ajuste creds."""
     conn = psycopg2.connect(
         host=os.getenv('DB_HOST', 'localhost'),
-        dbname=os.getenv('DB_NAME', 'edutech_db'),
+        dbname=os.getenv('DB_NAME', 'edutech'),
         user=os.getenv('DB_USER', 'edutech_user'),
         password=os.getenv('DB_PASSWORD', 'edutech_pass')
     )
     return conn
 
 def dump_tabela(conn, tabela_nome: str, df: pd.DataFrame):
-    """Insere DF na tabela via copy_from (rápido pra bulk)."""
+    """Insere DF na tabela via COPY."""
     cur = conn.cursor()
     
-    # Truncate opcional (comente se não quiser limpar)
-    cur.execute(f"TRUNCATE TABLE {tabela_nome} CASCADE;")
-    
     # Prepara colunas
-    cols = ', '.join(df.columns)
+    cols = ', '.join(f'"{col}"' for col in df.columns)
     
-    # Usa StringIO pra copy_from
+    # Usa StringIO para COPY
     from io import StringIO
     output = StringIO()
-    df.to_csv(output, sep='\t', header=False, index=False)
+    df.to_csv(output, sep=',', header=False, index=False, na_rep='\\N')
     output.seek(0)
     
-    cur.copy_from(output, tabela_nome, null="\\N", columns=df.columns.tolist())
+    # Usa COPY com formato CSV que é mais robusto
+    cur.copy_expert(
+        f"""
+        COPY {tabela_nome} ({cols})
+        FROM STDIN WITH (
+            FORMAT csv,
+            NULL '\\N'
+        )
+        """,
+        output
+    )
     conn.commit()
     cur.close()
-    print(f"✅ Dumped {len(df)} rows para {tabela_nome}")
+    print(f"Dumped {len(df)} rows para {tabela_nome}")
