@@ -47,7 +47,7 @@ def validar_csv(df: pd.DataFrame, tabela: str) -> bool:
             print(f"- {erro}")
         return False
         
-    print(f"{tabela} OK! ({len(df)} registros)")
+    print(f"{tabela} OK ({len(df)} registros)")
     return True
 
 def validar_fks(dfs: dict) -> bool:
@@ -80,7 +80,7 @@ def validar_fks(dfs: dict) -> bool:
                 erros.append(f"{tabela}.{coluna} tem valores inválidos: {invalidos}")
     
     if erros:
-        print("\n❌ Erros de FK:")
+        print("\n Erros de FK:")
         for erro in erros:
             print(f"- {erro}")
         return False
