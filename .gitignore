@@ -41,9 +41,9 @@ ENV/
 Thumbs.db
 
 # Data files
-edutech/data/*.csv
-edutech/data/*.json
-edutech/data/*.txt
+# edutech/data/*.csv
+# edutech/data/*.json
+# edutech/data/*.txt
 
 # Logs
 *.log
