@@ -58,6 +58,6 @@ graph TD
 
 - **Developer -> Scripts:** O desenvolvedor executa os scripts Python (`main.py` para o fluxo principal, `data_generator.py` opcionalmente).
 - **Scripts Python:** O `main.py` orquestra a validação e a carga, lendo os arquivos `.csv` e utilizando o `dump_data.py` para popular o banco.
-- **Definições SQL -> Banco:** Os scripts `schema.sql` e `views.sql` são usados para definir a estrutura e as abstrações dentro do banco de dados PostgreSQL.
+- **Definições SQL -> Banco:** Os scripts `schema.sql` e `views.sql`, localizados na pasta `sql/init`, são executados automaticamente na inicialização do container do PostgreSQL. Isso ocorre porque o `docker-compose.yml` mapeia o diretório `sql/init` para a pasta `/docker-entrypoint-initdb.d` dentro do container, um recurso da imagem oficial do `postgres` que executa scripts de inicialização.
 - **Carga de Dados:** O script `dump_data.py` (Loader) tem a responsabilidade de se conectar ao banco e inserir os dados em massa.
 - **Consultas:** O arquivo `queries.sql` contém as consultas de negócio que são executadas diretamente no banco de dados já populado.
