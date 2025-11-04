@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: edutech_postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-edutech}
+      POSTGRES_USER: ${POSTGRES_USER:-edutech_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-edutech_pass}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - ./edutech/sql/init:/docker-entrypoint-initdb.d:ro
+    tmpfs:
+      - /var/lib/postgresql/data
+    networks:
+      - edutech_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-edutech_user} -d ${POSTGRES_DB:-edutech}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  edutech_network:
+    driver: bridge
