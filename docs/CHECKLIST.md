@@ -7,10 +7,9 @@ Status de conclusão dos requisitos do projeto, organizado pela legenda de cores
 ### 🔴 Critérios Eliminatórios e Pendências Críticas
 
 * [ ] **Python:** Criar o script `processador_relatorios.py`.
-* [ ] **Python:** Criar o script `utils.py`.
 * [ ] **Entrega:** Realizar a apresentação do projeto.
 * [ ] **Entrega:** Publicar o projeto no LinkedIn e GitHub.
-* [ ] **Entrega:** Adicionar o professor como colaborador e abrir o Pull Request.
+* [x] **Entrega:** Adicionar o professor como colaborador e abrir o Pull Request.
 
 ***
 
@@ -30,8 +29,8 @@ Status de conclusão dos requisitos do projeto, organizado pela legenda de cores
 * [ ] **SQL:** Criar as queries específicas para os relatórios de negócio.
 * [ ] **Python:** Implementar a detecção de duplicatas no `csv_validator.py`.
 * [ ] **Python:** Fazer o `csv_validator.py` gerar um arquivo de relatório de erros.
-* [ ] **Documentação:** Completar o `README.md` com todas as seções obrigatórias.
-* [ ] **Documentação:** Documentar textualmente o Diagrama ER.
+* [x] **Documentação:** Completar o `README.md` com todas as seções obrigatórias.
+* [x] **Documentação:** Documentar textualmente o Diagrama ER.
 
 ***
 
@@ -45,7 +44,7 @@ Status de conclusão dos requisitos do projeto, organizado pela legenda de cores
 * [ ] **Python:** Adicionar `Type Hints` e `Docstrings` nas funções.
 * [ ] **Python:** Implementar tratamento de erros mais abrangente com `try/except`.
 * [ ] **Python:** Gerar visualizações em modo texto (gráficos ASCII) no `processador_relatorios.py`.
-* [ ] **Documentação:** Criar uma documentação técnica de alta qualidade.
+* [x] **Documentação:** Criar uma documentação técnica de alta qualidade.
 
 ***
 
